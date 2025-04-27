@@ -36,11 +36,11 @@ export function Header(){
         <header className={style.header}>
             <h1 className={style.header_h1}>Simple Color</h1>
             <p className={style.header_p}>A tool for lazy developers</p>
-            <div>
-                <input className={style.header_input} ref={colorRef} type="text" placeholder=""/>
-                <input onChange={(e) => setColor(e)} type="color" />
+            <div className={style.header_inputs}>
+                <input className={style.header_input_text} ref={colorRef} type="text" placeholder="Set your color"/>
+                <input className={style.header_input_color} onChange={(e) => setColor(e)} type="color" />
             </div>
-            <button onClick={chooseColor}>Set Color</button>
+            <button className={style.header_button} onClick={chooseColor}>Set Color</button>
         </header>
     );
 }

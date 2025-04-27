@@ -1,0 +1,23 @@
+.colors{
+    width: 100vw;
+    height: 50vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.color{
+    width: 25vw;
+
+    text-align: center;
+}
+
+.color_background{
+
+    height: 40vh;
+}
+
+.color_text{
+    height: 10vh;
+}
