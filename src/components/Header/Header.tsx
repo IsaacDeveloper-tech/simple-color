@@ -4,6 +4,12 @@ import { ColorsContext } from "../../contexts/Colors";
 
 import style from "./Header.module.css"
 
+type HeaderStyle = {
+    header              : CSSProperties,
+    headerInput         : CSSProperties,
+    headerButton        : CSSProperties
+};
+
 export function Header(){
     const colorRef = useRef<HTMLInputElement>(null);
     const colorContext = useContext(ColorsContext);
@@ -38,11 +44,82 @@ export function Header(){
         setColors(colors);
     }
 
+    // Styles
+    if(!colorContext || !colorContext.colors)
+        return <div>Fatal error with colors</div>
 
+    const solidStyle : HeaderStyle = {
+        
+        header: {
+            backgroundColor: colorContext.colors.primary,
+            color: colorContext.colors.primaryText
+        },
+
+        headerInput: {
+            backgroundColor: colorContext.colors.background,
+            color: colorContext.colors.text,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        },
+
+        headerButton: {
+            backgroundColor: colorContext.colors.secondary,
+            color: colorContext.colors.secondaryText,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        }
+    };
+
+    const gradientStyle : HeaderStyle = {
+        
+        header: {
+            background: `linear-gradient(72deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.secondary} 100%)`,
+            color: colorContext.colors.primaryText
+        },
+
+        headerInput: {
+            backgroundColor: colorContext.colors.background,
+            color: colorContext.colors.text,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        },
+
+        headerButton: {
+            background: `linear-gradient(200deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.tertiary} 50%, ${colorContext.colors.secondary} 100%)`,
+            color: colorContext.colors.tertiaryText,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        }
+    };
+
+    const gapStyle : HeaderStyle = {
+        
+        header: {
+            backgroundColor: colorContext.colors.primary,
+            color: colorContext.colors.primaryText
+        },
+
+        headerInput: {
+            backgroundColor: colorContext.colors.secondary,
+            color: colorContext.colors.secondaryText,
+            borderStyle: "solid",
+            borderWidth: "7px",
+            borderColor: colorContext.colors.tertiary,
+            borderRadius: 0,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.secondary}`
+        },
+
+        headerButton: {
+            backgroundColor: "transparent",
+            color: colorContext.colors.tertiary,
+            borderStyle: "solid",
+            borderWidth: "7px",
+            borderColor: colorContext.colors.tertiary,
+            borderRadius: 0,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.secondary}`
+        }
+    };
 
     return (
         <header 
             className={style.header}
+            style={gradientStyle.header}
         >
             
             <h1 
@@ -58,6 +135,7 @@ export function Header(){
             >
                 <input 
                     className={style.header_input_text} 
+                    style={gradientStyle.headerInput}
                     ref={colorRef} 
                     type="text" 
                     placeholder="Set your color"
@@ -72,6 +150,7 @@ export function Header(){
             <button 
                 className={style.header_button} 
                 onClick={chooseColor}
+                style={gradientStyle.headerButton}
             >Set Color</button>
 
         </header>
