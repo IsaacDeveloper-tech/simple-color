@@ -1,14 +1,34 @@
-import { createContext } from "react";
+import { createContext, useState } from "react";
+import { Colors } from "../hooks/useColors";
 
-const ColorsContextProvider = createContext(null);
+export type ColorsContextValue = {
+    colors: Colors,
+    setColors: React.Dispatch<React.SetStateAction<Colors>>
+};
 
-function ColorsContext(){
+export const ColorsContext = createContext<ColorsContextValue | null>(null);
+
+export function ColorsContextProvider({children}: React.PropsWithChildren){
+
+    const [colors, setColors] = useState<Colors>({
+        primary:    "",
+        secondary:  "",
+        tertiary:   "",
+
+        primaryText: "",
+        secondaryText: "",
+        tertiaryText: "",
+
+        background: "",
+        text: ""
+    });
     
     return(
-        <ColorsContextProvider.Provider value={{
-
+        <ColorsContext.Provider value={{
+            colors,
+            setColors
         }}>
-
-        </ColorsContextProvider.Provider>
+            { children }
+        </ColorsContext.Provider>
     );
 }

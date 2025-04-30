@@ -1,7 +1,14 @@
 export type Colors = {
-    primary   : string,
-    secondary : string,
-    tertiary  : string
+    primary         : string,
+    secondary       : string,
+    tertiary        : string,
+
+    primaryText     : string,
+    secondaryText   : string,
+    tertiaryText    : string,
+
+    background      : string,
+    text            : string
 };
 
 type ColorHSL = {
@@ -82,7 +89,14 @@ export function useColors(selectedColor:string): Colors{
     const colors:Colors = {
         primary:selectedColor,
         secondary:secondaryColor,
-        tertiary:tertiaryColor
+        tertiary:tertiaryColor,
+
+        primaryText: "",
+        secondaryText: "",
+        tertiaryText: "",
+
+        background: "black",
+        text: "white"
     }
 
     return colors;

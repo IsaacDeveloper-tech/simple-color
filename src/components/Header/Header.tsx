@@ -1,12 +1,14 @@
-import { ChangeEvent, useRef } from "react";
+import { ChangeEvent, useRef, useContext } from "react";
 import { useColors, Colors } from "../../hooks/useColors";
+import { ColorsContext } from "../../contexts/Colors";
 
 import style from "./Header.module.css"
 
 export function Header(){
     const colorRef = useRef<HTMLInputElement>(null);
+    const colorContext = useContext(ColorsContext);
 
-    const setColor = (event:ChangeEvent<HTMLInputElement>) : void => {
+    const putColor = (event:ChangeEvent<HTMLInputElement>) : void => {
         if(!colorRef.current)
             return;
 
@@ -27,9 +29,13 @@ export function Header(){
         if(!isValidInput(color.value))
             return;
 
-        const colors:Colors = useColors(color.value);
+        if(!colorContext || !colorContext.setColors)
+            return;
 
-        console.log(colors);
+        const colors:Colors = useColors(color.value);
+        const setColors = colorContext.setColors;
+        
+        setColors(colors);
     }
 
     return (
@@ -38,7 +44,7 @@ export function Header(){
             <p className={style.header_p}>A tool for lazy developers</p>
             <div className={style.header_inputs}>
                 <input className={style.header_input_text} ref={colorRef} type="text" placeholder="Set your color"/>
-                <input className={style.header_input_color} onChange={(e) => setColor(e)} type="color" />
+                <input className={style.header_input_color} onChange={(e) => putColor(e)} type="color" />
             </div>
             <button className={style.header_button} onClick={chooseColor}>Set Color</button>
         </header>
