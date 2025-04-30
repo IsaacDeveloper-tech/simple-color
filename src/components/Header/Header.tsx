@@ -1,4 +1,4 @@
-import { ChangeEvent, useRef, useContext } from "react";
+import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
 import { useColors, Colors } from "../../hooks/useColors";
 import { ColorsContext } from "../../contexts/Colors";
 
@@ -38,15 +38,42 @@ export function Header(){
         setColors(colors);
     }
 
+
+
     return (
-        <header className={style.header}>
-            <h1 className={style.header_h1}>Simple Color</h1>
-            <p className={style.header_p}>A tool for lazy developers</p>
-            <div className={style.header_inputs}>
-                <input className={style.header_input_text} ref={colorRef} type="text" placeholder="Set your color"/>
-                <input className={style.header_input_color} onChange={(e) => putColor(e)} type="color" />
+        <header 
+            className={style.header}
+        >
+            
+            <h1 
+                className={style.header_h1}
+            >Simple Color</h1>
+
+            <p 
+                className={style.header_p}
+            >A tool for lazy developers</p>
+
+            <div 
+                className={style.header_inputs}
+            >
+                <input 
+                    className={style.header_input_text} 
+                    ref={colorRef} 
+                    type="text" 
+                    placeholder="Set your color"
+                />
+                
+                <input 
+                    className={style.header_input_color} 
+                    onChange={(e) => putColor(e)} 
+                    type="color" 
+                />
             </div>
-            <button className={style.header_button} onClick={chooseColor}>Set Color</button>
+            <button 
+                className={style.header_button} 
+                onClick={chooseColor}
+            >Set Color</button>
+
         </header>
     );
 }
