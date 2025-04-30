@@ -47,9 +47,6 @@ function Color(data:ColorProps){
             >
                 <span>{data.colorBackground}</span>
             </div>
-            <div className={style.color_text} style={{backgroundColor:data.colorText}}>
-                <span>{data.colorText}</span>
-            </div>
         </div>
     );
 }
