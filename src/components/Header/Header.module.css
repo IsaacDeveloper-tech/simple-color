@@ -9,12 +9,12 @@
 }
 
 .header_h1{
-    font-size: 5vw;
+    font-size: 4vw;
     font-weight: 100;
 }
 
 .header_p{
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-weight: lighter;
 }
 
@@ -46,8 +46,8 @@
 }
 
 .header_button{
-    width: 10vw;
-    height: 6vh;
+    width: 10em;
+    height: 4em;
     margin-top: 2em;
 
     border: none;

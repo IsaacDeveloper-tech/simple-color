@@ -48,26 +48,6 @@ export function Header(){
     if(!colorContext || !colorContext.colors)
         return <div>Fatal error with colors</div>
 
-    const solidStyle : HeaderStyle = {
-        
-        header: {
-            backgroundColor: colorContext.colors.primary,
-            color: colorContext.colors.primaryText
-        },
-
-        headerInput: {
-            backgroundColor: colorContext.colors.background,
-            color: colorContext.colors.text,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        },
-
-        headerButton: {
-            backgroundColor: colorContext.colors.secondary,
-            color: colorContext.colors.secondaryText,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        }
-    };
-
     const gradientStyle : HeaderStyle = {
         
         header: {
@@ -85,34 +65,6 @@ export function Header(){
             background: `linear-gradient(200deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.tertiary} 50%, ${colorContext.colors.secondary} 100%)`,
             color: colorContext.colors.tertiaryText,
             boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        }
-    };
-
-    const gapStyle : HeaderStyle = {
-        
-        header: {
-            backgroundColor: colorContext.colors.primary,
-            color: colorContext.colors.primaryText
-        },
-
-        headerInput: {
-            backgroundColor: colorContext.colors.secondary,
-            color: colorContext.colors.secondaryText,
-            borderStyle: "solid",
-            borderWidth: "7px",
-            borderColor: colorContext.colors.tertiary,
-            borderRadius: 0,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.secondary}`
-        },
-
-        headerButton: {
-            backgroundColor: "transparent",
-            color: colorContext.colors.tertiary,
-            borderStyle: "solid",
-            borderWidth: "7px",
-            borderColor: colorContext.colors.tertiary,
-            borderRadius: 0,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.secondary}`
         }
     };
 

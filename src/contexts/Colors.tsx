@@ -11,16 +11,16 @@ export const ColorsContext = createContext<ColorsContextValue | null>(null);
 export function ColorsContextProvider({children}: React.PropsWithChildren){
 
     const [colors, setColors] = useState<Colors>({
-        primary:    "",
-        secondary:  "",
-        tertiary:   "",
+        primary:    "#430094",
+        secondary:  "#780abd",
+        tertiary:   "#948d00",
 
-        primaryText: "",
-        secondaryText: "",
-        tertiaryText: "",
+        primaryText: "#ffffff",
+        secondaryText: "#ffffff",
+        tertiaryText: "#ffffff",
 
-        background: "",
-        text: ""
+        background: "#f2f2f2",
+        text: "#16161d"
     });
     
     return(
