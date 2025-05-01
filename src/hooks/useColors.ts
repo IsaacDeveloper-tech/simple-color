@@ -1,15 +1,4 @@
-export type Colors = {
-    primary         : string,
-    secondary       : string,
-    tertiary        : string,
-
-    primaryText     : string,
-    secondaryText   : string,
-    tertiaryText    : string,
-
-    background      : string,
-    text            : string
-};
+import { Colors } from "../types/color-types";
 
 type ColorHSL = {
     h : number, // Hue

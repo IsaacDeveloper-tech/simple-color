@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
-import { useColors, Colors } from "../../hooks/useColors";
+import { useColors } from "../../hooks/useColors";
+import { Colors } from "../../types/color-types";
 import { ColorsContext } from "../../contexts/Colors";
 
 import style from "./Header.module.css"

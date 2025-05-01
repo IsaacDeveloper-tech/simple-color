@@ -1,10 +1,6 @@
 import { createContext, useState } from "react";
-import { Colors } from "../hooks/useColors";
-
-export type ColorsContextValue = {
-    colors: Colors,
-    setColors: React.Dispatch<React.SetStateAction<Colors>>
-};
+import { Colors } from "../types/color-types";
+import { ColorsContextValue } from "../types/color-types";
 
 export const ColorsContext = createContext<ColorsContextValue | null>(null);
 

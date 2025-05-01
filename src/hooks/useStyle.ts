@@ -1,5 +1,5 @@
 import { CSSProperties, useRef } from "react";
-import { Colors } from "./useColors";
+import { Colors } from "../types/color-types";
 
 export type HeaderStyle = {
     header              : CSSProperties,
