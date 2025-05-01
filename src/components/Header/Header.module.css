@@ -9,23 +9,30 @@
 }
 
 .header_h1{
-    font-size: 5vw;
+    font-size: 4vw;
     font-weight: 100;
 }
 
 .header_p{
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-weight: lighter;
 }
 
-.header_inputs{
+.header_inputs, .header_buttons{
     width: 100%;
     height: 3em;
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header_inputs{
     gap: 5px;
+}
+
+.header_buttons{
+    gap: 1.5em;
 }
 
 .header_input_text, .header_input_color{
@@ -38,7 +45,6 @@
     border-radius: 5px;
     border: none;
     padding-left: 10px;
-    box-shadow: 0 1px 2px black;
 }
 
 .header_input_color{
@@ -47,8 +53,8 @@
 }
 
 .header_button{
-    width: 10vw;
-    height: 6vh;
+    width: 10em;
+    height: 4em;
     margin-top: 2em;
 
     border: none;

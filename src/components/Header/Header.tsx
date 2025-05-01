@@ -1,8 +1,16 @@
 import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
-import { useColors, Colors } from "../../hooks/useColors";
+import { useColors } from "../../hooks/useColors";
+import { useGetStyle } from "../../hooks/useGetStyle";
+import { Colors } from "../../types/color-types";
 import { ColorsContext } from "../../contexts/Colors";
 
 import style from "./Header.module.css"
+
+type HeaderStyle = {
+    header              : CSSProperties,
+    headerInput         : CSSProperties,
+    headerButton        : CSSProperties
+};
 
 export function Header(){
     const colorRef = useRef<HTMLInputElement>(null);
@@ -18,6 +26,10 @@ export function Header(){
     const isValidInput = (input:string) : boolean => {
         const regex:RegExp = /^#([0-9a-fA-F]{6})$/;
         return regex.test(input);
+    };
+
+    const copyStyle = (colors:Colors) : void => {
+        useGetStyle(colors);
     };
     
     const chooseColor = () : void => {
@@ -38,11 +50,34 @@ export function Header(){
         setColors(colors);
     }
 
+    // Styles
+    if(!colorContext || !colorContext.colors)
+        return <div>Fatal error with colors</div>
 
+    const gradientStyle : HeaderStyle = {
+        
+        header: {
+            background: `linear-gradient(72deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.secondary} 100%)`,
+            color: colorContext.colors.primaryText
+        },
+
+        headerInput: {
+            backgroundColor: colorContext.colors.background,
+            color: colorContext.colors.text,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        },
+
+        headerButton: {
+            background: `linear-gradient(200deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.tertiary} 50%, ${colorContext.colors.secondary} 100%)`,
+            color: colorContext.colors.tertiaryText,
+            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        }
+    };
 
     return (
         <header 
             className={style.header}
+            style={gradientStyle.header}
         >
             
             <h1 
@@ -58,6 +93,7 @@ export function Header(){
             >
                 <input 
                     className={style.header_input_text} 
+                    style={gradientStyle.headerInput}
                     ref={colorRef} 
                     type="text" 
                     placeholder="Set your color"
@@ -69,10 +105,20 @@ export function Header(){
                     type="color" 
                 />
             </div>
-            <button 
-                className={style.header_button} 
-                onClick={chooseColor}
-            >Set Color</button>
+            <div
+                className={style.header_buttons}
+            >
+                <button 
+                    className={style.header_button} 
+                    onClick={chooseColor}
+                    style={gradientStyle.headerButton}
+                >Set Color</button>
+                <button 
+                    className={style.header_button} 
+                    onClick={() => copyStyle(colorContext.colors)}
+                    style={gradientStyle.headerButton}
+                >Copy Colors</button>
+            </div>
 
         </header>
     );
