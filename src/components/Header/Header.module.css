@@ -18,14 +18,21 @@
     font-weight: lighter;
 }
 
-.header_inputs{
+.header_inputs, .header_buttons{
     width: 100%;
     height: 3em;
 
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.header_inputs{
     gap: 5px;
+}
+
+.header_buttons{
+    gap: 1.5em;
 }
 
 .header_input_text, .header_input_color{

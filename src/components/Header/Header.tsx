@@ -1,5 +1,6 @@
 import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
 import { useColors } from "../../hooks/useColors";
+import { useGetStyle } from "../../hooks/useGetStyle";
 import { Colors } from "../../types/color-types";
 import { ColorsContext } from "../../contexts/Colors";
 
@@ -25,6 +26,10 @@ export function Header(){
     const isValidInput = (input:string) : boolean => {
         const regex:RegExp = /^#([0-9a-fA-F]{6})$/;
         return regex.test(input);
+    };
+
+    const copyStyle = (colors:Colors) : void => {
+        useGetStyle(colors);
     };
     
     const chooseColor = () : void => {
@@ -100,11 +105,20 @@ export function Header(){
                     type="color" 
                 />
             </div>
-            <button 
-                className={style.header_button} 
-                onClick={chooseColor}
-                style={gradientStyle.headerButton}
-            >Set Color</button>
+            <div
+                className={style.header_buttons}
+            >
+                <button 
+                    className={style.header_button} 
+                    onClick={chooseColor}
+                    style={gradientStyle.headerButton}
+                >Set Color</button>
+                <button 
+                    className={style.header_button} 
+                    onClick={() => copyStyle(colorContext.colors)}
+                    style={gradientStyle.headerButton}
+                >Copy Colors</button>
+            </div>
 
         </header>
     );
