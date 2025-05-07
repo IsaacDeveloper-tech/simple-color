@@ -1,10 +1,10 @@
 import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
-import { useColors } from "../../hooks/useColors";
-import { useGetStyle } from "../../hooks/useGetStyle";
-import { Colors } from "../../types/color-types";
-import { ColorsContext } from "../../contexts/Colors";
+import { useColors } from "~/hooks/useColors";
+import { useGetStyle } from "~/hooks/useGetStyle";
+import { Colors } from "~/types/color-types";
+import { ColorsContext } from "~/contexts/Colors";
 
-import style from "./Header.module.css"
+import style from "~/styles/header.module.css"
 
 type HeaderStyle = {
     header              : CSSProperties,
@@ -49,7 +49,6 @@ export function Header(){
         
         setColors(colors);
     }
-
     // Styles
     if(!colorContext || !colorContext.colors)
         return <div>Fatal error with colors</div>

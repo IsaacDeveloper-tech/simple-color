@@ -1,7 +1,7 @@
-import style from "./Colors.module.css";
+import style from "~/styles/colors.module.css";
 import { useContext } from "react";
-import { ColorsContext } from "../../contexts/Colors";
-import { ColorsContextValue } from "../../types/color-types";
+import { ColorsContext } from "~/contexts/Colors";
+import { ColorsContextValue } from "~/types/color-types";
 
 type ColorProps = {
     colorBackground:string,
