@@ -1,5 +1,5 @@
-import { Colors } from "./_colors";
-import { Header } from "./_tool";
+import { Colors } from "../components/colors";
+import { Header } from "../components/tool";
 
 export default function Index() {
   return (
