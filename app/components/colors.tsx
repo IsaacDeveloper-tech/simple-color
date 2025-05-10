@@ -1,4 +1,3 @@
-import style from "~/styles/colors.module.css";
 import { useContext } from "react";
 import { ColorsContext } from "~/contexts/Colors";
 import { ColorsContextValue } from "~/types/color-types";
@@ -27,7 +26,7 @@ export function Colors(){
     } = colorContext.colors;
 
     return(
-        <div className={style.colors}>
+        <div className="w-full h-[50vh] flex items-center justify-center">
             <Color colorBackground={primary} colorText={primaryText} />
             <Color colorBackground={secondary} colorText={secondaryText} />
             <Color colorBackground={tertiary} colorText={tertiaryText} />
@@ -38,9 +37,9 @@ export function Colors(){
 
 function Color(data:ColorProps){
     return(
-        <div className={style.color}>
+        <div className="w-[25vw] text-center">
             <div 
-                className={style.color_background} 
+                className="h-[50vh]" 
                 style={{
                     backgroundColor:data.colorBackground,
                     color:data.colorText
