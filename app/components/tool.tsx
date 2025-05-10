@@ -4,8 +4,6 @@ import { useGetStyle } from "~/hooks/useGetStyle";
 import { Colors } from "~/types/color-types";
 import { ColorsContext } from "~/contexts/Colors";
 
-import style from "~/styles/header.module.css"
-
 type HeaderStyle = {
     header              : CSSProperties,
     headerInput         : CSSProperties,
@@ -75,23 +73,23 @@ export function Header(){
 
     return (
         <header 
-            className={style.header}
+            className="flex flex-col items-center justify-center w-full h-[50vh]"
             style={gradientStyle.header}
         >
             
             <h1 
-                className={style.header_h1}
+                className="text-[4vw] font-thin"
             >Simple Color</h1>
 
             <p 
-                className={style.header_p}
+                className="text-[1.5vw] font-thin"
             >A tool for lazy developers</p>
 
             <div 
-                className={style.header_inputs}
+                className="flex items-center justify-center w-full h-[3em] gap-[5px]"
             >
                 <input 
-                    className={style.header_input_text} 
+                    className="h-[3em] w-[50%] rounded-[5px] border-none pl-[10px]" 
                     style={gradientStyle.headerInput}
                     ref={colorRef} 
                     type="text" 
@@ -99,21 +97,21 @@ export function Header(){
                 />
                 
                 <input 
-                    className={style.header_input_color} 
+                    className="h-[3em] border-none bg-transparent" 
                     onChange={(e) => putColor(e)} 
                     type="color" 
                 />
             </div>
             <div
-                className={style.header_buttons}
+                className="flex items-center justify-center w-full h-[3em] gap-[1.5em]"
             >
                 <button 
-                    className={style.header_button} 
+                    className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
                     onClick={chooseColor}
                     style={gradientStyle.headerButton}
                 >Set Color</button>
                 <button 
-                    className={style.header_button} 
+                    className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
                     onClick={() => copyStyle(colorContext.colors)}
                     style={gradientStyle.headerButton}
                 >Copy Colors</button>
