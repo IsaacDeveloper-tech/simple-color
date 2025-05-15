@@ -70,7 +70,7 @@ function getTertiaryColor(color:ColorHSL):ColorHSL{
     return secondaryColor;
 }
 
-function getBestTextColor(hexColor:string):string {
+export function getBestTextColor(hexColor:string):string {
     hexColor = hexColor.replace('#', '');
     if (hexColor.length === 3) {
         hexColor = hexColor.split('').map(c => c + c).join('');

@@ -26,7 +26,7 @@ export function Colors(){
     } = colorContext.colors;
 
     return(
-        <div className="w-full h-[50vh] flex items-center justify-center">
+        <div className="w-full h-[25vh] flex items-center justify-center">
             <Color colorBackground={primary} colorText={primaryText} />
             <Color colorBackground={secondary} colorText={secondaryText} />
             <Color colorBackground={tertiary} colorText={tertiaryText} />
