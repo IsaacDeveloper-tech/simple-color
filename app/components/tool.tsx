@@ -73,7 +73,7 @@ export function Header(){
 
     return (
         <header 
-            className="flex flex-col items-center justify-center w-full h-[50vh]"
+            className="flex flex-col items-center justify-center w-full h-[75vh]"
             style={gradientStyle.header}
         >
             
