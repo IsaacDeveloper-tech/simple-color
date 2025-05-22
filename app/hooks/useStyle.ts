@@ -1,4 +1,4 @@
-import { CSSProperties, useRef } from "react";
+import { CSSProperties } from "react";
 import { Colors } from "../types/color-types";
 
 export type HeaderStyle = {
@@ -7,16 +7,14 @@ export type HeaderStyle = {
     headerButton        : CSSProperties
 };
 
-enum Style{
+export enum Style{
     SOLID,
     GRADIENT,
     GAP
 };
 
-export function useStyle(colors:Colors) : HeaderStyle{
-    const style = useRef<number>(0);
-    const max_num_styles : number = 3; 
-
+export function useStyle(colors:Colors, style:Style) : HeaderStyle{
+    
     const solidStyle : HeaderStyle = {
         
         header: {
@@ -85,22 +83,19 @@ export function useStyle(colors:Colors) : HeaderStyle{
         }
     };
 
-    if(style.current === max_num_styles)
-        style.current = 0;
-    else
-        style.current++;
-
-    console.log(style.current);
-
-    switch(style.current){
+    switch(style)
+    {
         case Style.SOLID:
             return solidStyle;
-        case Style.GRADIENT:
-            return gradientStyle;
+    
         case Style.GAP:
             return gapStyle;
-        default:
+
+        case Style.GRADIENT:
             return gradientStyle;
+        
+            default:
+                return gradientStyle;
     }
 
 }

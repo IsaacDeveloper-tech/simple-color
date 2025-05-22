@@ -1,17 +1,17 @@
 import { useContext } from "react";
-import { ColorsContext } from "~/contexts/Colors";
+import { GeneralContext } from "~/contexts/General";
 import { useDarkMode } from "~/hooks/useDarkMode";
 import { useSetDarkMode } from "~/hooks/useSetDarkMode";
-import { ColorsContextValue } from "~/types/color-types";
+import { GeneralContextValue } from "~/types/color-types";
 
 export function Navbar(){
 
-    const colorsContext = useContext(ColorsContext);
+    const colorsContext = useContext(GeneralContext);
     if(!colorsContext) return;
 
     const canBeDarkMode = useDarkMode(colorsContext.colors.primary);
 
-    const OnClickDarkMode = (colorsContext:ColorsContextValue) => {
+    const OnClickDarkMode = (colorsContext:GeneralContextValue) => {
         colorsContext.setColors(useSetDarkMode(colorsContext.colors));
     };
 

@@ -1,3 +1,5 @@
+import { HeaderStyle } from "~/hooks/useStyle";
+
 export type Colors = {
     primary         : string,
     secondary       : string,
@@ -11,7 +13,9 @@ export type Colors = {
     text            : string
 };
 
-export type ColorsContextValue = {
+export type GeneralContextValue = {
     colors: Colors,
-    setColors: React.Dispatch<React.SetStateAction<Colors>>
+    setColors: React.Dispatch<React.SetStateAction<Colors>>,
+    styleType: HeaderStyle,
+    setStyleType: React.Dispatch<React.SetStateAction<HeaderStyle>>
 };

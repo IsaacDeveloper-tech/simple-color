@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { ColorsContext } from "~/contexts/Colors";
-import { ColorsContextValue } from "~/types/color-types";
+import { GeneralContext } from "~/contexts/General";
+import { GeneralContextValue } from "~/types/color-types";
 
 type ColorProps = {
     colorBackground:string,
@@ -9,7 +9,7 @@ type ColorProps = {
 
 export function Colors(){
 
-    const colorContext: ColorsContextValue | null = useContext(ColorsContext);
+    const colorContext: GeneralContextValue | null = useContext(GeneralContext);
 
     if(!colorContext || !colorContext.colors)
         return <div>Error getting colors</div>

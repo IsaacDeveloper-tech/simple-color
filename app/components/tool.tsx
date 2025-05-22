@@ -1,18 +1,13 @@
-import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
+import { ChangeEvent, useRef, useContext } from "react";
 import { useColors } from "~/hooks/useColors";
 import { useGetStyle } from "~/hooks/useGetStyle";
 import { Colors } from "~/types/color-types";
-import { ColorsContext } from "~/contexts/Colors";
-
-type HeaderStyle = {
-    header              : CSSProperties,
-    headerInput         : CSSProperties,
-    headerButton        : CSSProperties
-};
+import { GeneralContext } from "~/contexts/General";
+import { useStyle, Style } from "~/hooks/useStyle";
 
 export function Header(){
     const colorRef = useRef<HTMLInputElement>(null);
-    const colorContext = useContext(ColorsContext);
+    const generalContext = useContext(GeneralContext);
 
     const putColor = (event:ChangeEvent<HTMLInputElement>) : void => {
         if(!colorRef.current)
@@ -29,7 +24,32 @@ export function Header(){
     const copyStyle = (colors:Colors) : void => {
         useGetStyle(colors);
     };
-    
+
+    // Styles
+    if(!generalContext || !generalContext.colors)
+        return <div>Fatal error with colors</div>
+
+    const putStyle = (event:ChangeEvent<HTMLSelectElement>) : void => {
+        const typeStyle : string = event.target.value;
+        let styleSelected : Style;
+
+        switch(typeStyle)
+        {
+            case "gap":
+                styleSelected = Style.GAP;
+                break;
+            case "solid":
+                styleSelected = Style.SOLID;
+                break;
+            case "gradient":
+                styleSelected = Style.GRADIENT;
+                break;
+        }
+
+        generalContext.setStyleType(style => useStyle(generalContext.colors, styleSelected));
+        console.log(event.target.value);
+    };
+
     const chooseColor = () : void => {
         const color : HTMLInputElement | null = colorRef.current;
 
@@ -39,42 +59,16 @@ export function Header(){
         if(!isValidInput(color.value))
             return;
 
-        if(!colorContext || !colorContext.setColors)
+        if(!generalContext || !generalContext.setColors)
             return;
 
-        const colors:Colors = useColors(color.value);
-        const setColors = colorContext.setColors;
-        
-        setColors(colors);
+        generalContext.setColors(colors => useColors(color.value));
     }
-    // Styles
-    if(!colorContext || !colorContext.colors)
-        return <div>Fatal error with colors</div>
-
-    const gradientStyle : HeaderStyle = {
-        
-        header: {
-            background: `linear-gradient(72deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.secondary} 100%)`,
-            color: colorContext.colors.primaryText
-        },
-
-        headerInput: {
-            backgroundColor: colorContext.colors.background,
-            color: colorContext.colors.text,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        },
-
-        headerButton: {
-            background: `linear-gradient(200deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.tertiary} 50%, ${colorContext.colors.secondary} 100%)`,
-            color: colorContext.colors.tertiaryText,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        }
-    };
 
     return (
         <header 
             className="flex flex-col items-center justify-center w-full h-[75vh]"
-            style={gradientStyle.header}
+            style={generalContext.styleType.header}
         >
             
             <h1 
@@ -90,7 +84,7 @@ export function Header(){
             >
                 <input 
                     className="h-[3em] w-[50%] rounded-[5px] border-none pl-[10px]" 
-                    style={gradientStyle.headerInput}
+                    style={generalContext.styleType.headerInput}
                     ref={colorRef} 
                     type="text" 
                     placeholder="Set your color"
@@ -108,13 +102,24 @@ export function Header(){
                 <button 
                     className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
                     onClick={chooseColor}
-                    style={gradientStyle.headerButton}
+                    style={generalContext.styleType.headerButton}
                 >Set Color</button>
                 <button 
                     className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
-                    onClick={() => copyStyle(colorContext.colors)}
-                    style={gradientStyle.headerButton}
+                    onClick={() => copyStyle(generalContext.colors)}
+                    style={generalContext.styleType.headerButton}
                 >Copy Colors</button>
+                <select 
+                    name="cars" 
+                    id="cars" 
+                    className="w-[5em] h-[4em] mt-[2em] border-none rounded-[5px] text-center"
+                    style={generalContext.styleType.headerInput}
+                    onChange={putStyle}
+                >
+                    <option value="gradient">Gradient</option>
+                    <option value="gap">Gap</option>
+                    <option value="solid">Solid</option>
+                </select>
             </div>
 
         </header>
