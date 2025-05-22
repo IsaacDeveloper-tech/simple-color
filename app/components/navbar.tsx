@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ColorsContext } from "~/contexts/Colors";
 import { useDarkMode } from "~/hooks/useDarkMode";
 import { useSetDarkMode } from "~/hooks/useSetDarkMode";
-import { Colors, ColorsContextValue } from "~/types/color-types";
+import { ColorsContextValue } from "~/types/color-types";
 
 export function Navbar(){
 
@@ -12,7 +12,6 @@ export function Navbar(){
     const canBeDarkMode = useDarkMode(colorsContext.colors.primary);
 
     const OnClickDarkMode = (colorsContext:ColorsContextValue) => {
-        console.log(useSetDarkMode(colorsContext.colors));
         colorsContext.setColors(useSetDarkMode(colorsContext.colors));
     };
 
@@ -23,10 +22,13 @@ export function Navbar(){
                     Simple Color
                 </div>
                 <div className="flex items-center space-x-4">
+                    {/**
+                     * Hide by now
                     <a href="#" className="text-gray-300 hover:text-white">Home</a>
                     <a href="#" className="text-gray-300 hover:text-white">About</a>
                     <a href="#" className="text-gray-300 hover:text-white">Services</a>
                     <a href="#" className="text-gray-300 hover:text-white">Contact</a>
+                     */}
                     {   canBeDarkMode &&
                         <button onClick={() => OnClickDarkMode(colorsContext)} className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
                             Dark Mode
