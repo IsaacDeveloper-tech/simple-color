@@ -6,7 +6,7 @@ import {
 } from "@remix-run/react";
 import type { LinksFunction } from "@remix-run/node";
 
-import { ColorsContextProvider } from "./contexts/Colors";
+import { GeneralContextProvider } from "./contexts/General";
 
 import "./tailwind.css";
 
@@ -33,9 +33,9 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Links />
       </head>
       <body>
-        <ColorsContextProvider>
+        <GeneralContextProvider>
           {children}
-        </ColorsContextProvider>
+        </GeneralContextProvider>
         <Scripts />
       </body>
     </html>

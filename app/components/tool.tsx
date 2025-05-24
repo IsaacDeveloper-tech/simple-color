@@ -1,18 +1,14 @@
-import { ChangeEvent, useRef, useContext, CSSProperties } from "react";
+import { ChangeEvent, useRef, useContext } from "react";
 import { useColors } from "~/hooks/useColors";
 import { useGetStyle } from "~/hooks/useGetStyle";
-import { Colors } from "~/types/color-types";
-import { ColorsContext } from "~/contexts/Colors";
-
-type HeaderStyle = {
-    header              : CSSProperties,
-    headerInput         : CSSProperties,
-    headerButton        : CSSProperties
-};
+import { Colors, Status } from "~/types/types";
+import { GeneralContext } from "~/contexts/General";
+import { useStyle, Style } from "~/hooks/useStyle";
 
 export function Header(){
     const colorRef = useRef<HTMLInputElement>(null);
-    const colorContext = useContext(ColorsContext);
+    const styleRef = useRef<HTMLSelectElement>(null);
+    const generalContext = useContext(GeneralContext);
 
     const putColor = (event:ChangeEvent<HTMLInputElement>) : void => {
         if(!colorRef.current)
@@ -29,7 +25,37 @@ export function Header(){
     const copyStyle = (colors:Colors) : void => {
         useGetStyle(colors);
     };
-    
+
+    // Styles
+    if(!generalContext || !generalContext.state.colorState)
+        return <div>Fatal error with colors</div>
+
+    const putStyle = (event:ChangeEvent<HTMLSelectElement>) : void => {
+        const typeStyle : string = event.target.value;
+        let styleSelected : Style;
+
+        switch(typeStyle)
+        {
+            case "gap":
+                styleSelected = Style.GAP;
+                break;
+            case "solid":
+                styleSelected = Style.SOLID;
+                break;
+            case "gradient":
+                styleSelected = Style.GRADIENT;
+                break;
+        }
+
+        generalContext.setState(
+            state => {
+                const newState:Status = {...state};
+                newState.styleState = useStyle(state.colorState, styleSelected);
+                return newState;
+            }
+        );
+    };
+
     const chooseColor = () : void => {
         const color : HTMLInputElement | null = colorRef.current;
 
@@ -39,42 +65,42 @@ export function Header(){
         if(!isValidInput(color.value))
             return;
 
-        if(!colorContext || !colorContext.setColors)
+        if(!generalContext)
             return;
 
-        const colors:Colors = useColors(color.value);
-        const setColors = colorContext.setColors;
-        
-        setColors(colors);
-    }
-    // Styles
-    if(!colorContext || !colorContext.colors)
-        return <div>Fatal error with colors</div>
+        if(!styleRef.current)
+            return;
 
-    const gradientStyle : HeaderStyle = {
-        
-        header: {
-            background: `linear-gradient(72deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.secondary} 100%)`,
-            color: colorContext.colors.primaryText
-        },
+        let styleSelected : Style;
 
-        headerInput: {
-            backgroundColor: colorContext.colors.background,
-            color: colorContext.colors.text,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
-        },
-
-        headerButton: {
-            background: `linear-gradient(200deg, ${colorContext.colors.primary} 0%, ${colorContext.colors.tertiary} 50%, ${colorContext.colors.secondary} 100%)`,
-            color: colorContext.colors.tertiaryText,
-            boxShadow: `0 3px 8px -1px ${colorContext.colors.tertiary}`
+        switch(styleRef.current.value)
+        {
+            case "gap":
+                styleSelected = Style.GAP;
+                break;
+            case "solid":
+                styleSelected = Style.SOLID;
+                break;
+            case "gradient":
+                styleSelected = Style.GRADIENT;
+                break;
         }
-    };
+
+        generalContext.setState(
+            state => {
+                const newState:Status = {...state};
+
+                newState.colorState = useColors(color.value);
+                newState.styleState = useStyle(newState.colorState, styleSelected);
+                return newState;
+            }
+        );
+    }
 
     return (
         <header 
             className="flex flex-col items-center justify-center w-full h-[75vh]"
-            style={gradientStyle.header}
+            style={generalContext.state.styleState.header}
         >
             
             <h1 
@@ -90,7 +116,7 @@ export function Header(){
             >
                 <input 
                     className="h-[3em] w-[50%] rounded-[5px] border-none pl-[10px]" 
-                    style={gradientStyle.headerInput}
+                    style={generalContext.state.styleState.headerInput}
                     ref={colorRef} 
                     type="text" 
                     placeholder="Set your color"
@@ -108,13 +134,25 @@ export function Header(){
                 <button 
                     className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
                     onClick={chooseColor}
-                    style={gradientStyle.headerButton}
+                    style={generalContext.state.styleState.headerButton}
                 >Set Color</button>
                 <button 
                     className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
-                    onClick={() => copyStyle(colorContext.colors)}
-                    style={gradientStyle.headerButton}
+                    onClick={() => copyStyle(generalContext.state.colorState)}
+                    style={generalContext.state.styleState.headerButton}
                 >Copy Colors</button>
+                <select 
+                    name="cars" 
+                    id="cars" 
+                    className="w-[5em] h-[4em] mt-[2em] border-none rounded-[5px] text-center"
+                    style={generalContext.state.styleState.headerInput}
+                    onChange={putStyle}
+                    ref={styleRef}
+                >
+                    <option value="gradient">Gradient</option>
+                    <option value="gap">Gap</option>
+                    <option value="solid">Solid</option>
+                </select>
             </div>
 
         </header>

@@ -1,18 +1,26 @@
 import { useContext } from "react";
-import { ColorsContext } from "~/contexts/Colors";
+import { GeneralContext } from "~/contexts/General";
 import { useDarkMode } from "~/hooks/useDarkMode";
 import { useSetDarkMode } from "~/hooks/useSetDarkMode";
-import { ColorsContextValue } from "~/types/color-types";
+import { useStyle } from "~/hooks/useStyle";
+import { GeneralContextValue, Status } from "~/types/types";
 
 export function Navbar(){
 
-    const colorsContext = useContext(ColorsContext);
-    if(!colorsContext) return;
+    const generalContext = useContext(GeneralContext);
+    if(!generalContext) return;
 
-    const canBeDarkMode = useDarkMode(colorsContext.colors.primary);
+    const canBeDarkMode = useDarkMode(generalContext.state.colorState.primary);
 
-    const OnClickDarkMode = (colorsContext:ColorsContextValue) => {
-        colorsContext.setColors(useSetDarkMode(colorsContext.colors));
+    const OnClickDarkMode = (generalContext:GeneralContextValue) => {
+        generalContext.setState(
+            state => {
+                const newState:Status = {...state};
+                newState.colorState = useSetDarkMode(generalContext.state.colorState);
+                newState.styleState = useStyle(newState.colorState);
+                return newState;
+            }
+        );
     };
 
     return (
@@ -30,7 +38,7 @@ export function Navbar(){
                     <a href="#" className="text-gray-300 hover:text-white">Contact</a>
                      */}
                     {   canBeDarkMode &&
-                        <button onClick={() => OnClickDarkMode(colorsContext)} className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
+                        <button onClick={() => OnClickDarkMode(generalContext)} className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded">
                             Dark Mode
                         </button>
                     }
