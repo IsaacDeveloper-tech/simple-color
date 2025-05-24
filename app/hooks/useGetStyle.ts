@@ -1,4 +1,4 @@
-import { Colors } from "../types/color-types";
+import { Colors } from "../types/types";
 
 export function useGetStyle(colors:Colors): void{
     const style = `

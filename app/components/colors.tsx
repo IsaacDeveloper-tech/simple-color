@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { GeneralContext } from "~/contexts/General";
-import { GeneralContextValue } from "~/types/color-types";
+import { GeneralContextValue } from "~/types/types";
 
 type ColorProps = {
     colorBackground:string,
@@ -11,7 +11,7 @@ export function Colors(){
 
     const colorContext: GeneralContextValue | null = useContext(GeneralContext);
 
-    if(!colorContext || !colorContext.colors)
+    if(!colorContext || !colorContext.state.colorState)
         return <div>Error getting colors</div>
 
     const {
@@ -23,7 +23,7 @@ export function Colors(){
         tertiaryText,
         background,
         text
-    } = colorContext.colors;
+    } = colorContext.state.colorState;
 
     return(
         <div className="w-full h-[25vh] flex items-center justify-center">

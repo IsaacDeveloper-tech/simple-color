@@ -1,5 +1,5 @@
 import { CSSProperties } from "react";
-import { Colors } from "../types/color-types";
+import { Colors } from "../types/types";
 
 export type HeaderStyle = {
     header              : CSSProperties,
@@ -13,7 +13,7 @@ export enum Style{
     GAP
 };
 
-export function useStyle(colors:Colors, style:Style) : HeaderStyle{
+export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderStyle{
     
     const solidStyle : HeaderStyle = {
         

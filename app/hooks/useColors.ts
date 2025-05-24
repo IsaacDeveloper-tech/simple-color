@@ -1,4 +1,4 @@
-import { Colors } from "../types/color-types";
+import { Colors } from "../types/types";
 
 type ColorHSL = {
     h : number, // Hue

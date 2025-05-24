@@ -13,9 +13,12 @@ export type Colors = {
     text            : string
 };
 
+export type Status = {
+    colorState:Colors,
+    styleState:HeaderStyle
+};
+
 export type GeneralContextValue = {
-    colors: Colors,
-    setColors: React.Dispatch<React.SetStateAction<Colors>>,
-    styleType: HeaderStyle,
-    setStyleType: React.Dispatch<React.SetStateAction<HeaderStyle>>
+    state: Status,
+    setState: React.Dispatch<React.SetStateAction<Status>>,
 };

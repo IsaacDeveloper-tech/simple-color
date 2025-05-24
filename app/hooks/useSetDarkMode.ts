@@ -1,4 +1,4 @@
-import { Colors } from "../types/color-types";
+import { Colors } from "../types/types";
 import { getBestTextColor } from "./useColors";
 
 // Function to darken a hex color
