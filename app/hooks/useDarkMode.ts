@@ -1,3 +1,4 @@
+// Custom hooks
 export function useDarkMode(hexColor: string):boolean{
     // Remove the '#' if it exists
     hexColor = hexColor.replace("#", "");

@@ -8,9 +8,9 @@ export type HeaderStyle = {
 };
 
 export enum Style{
-    SOLID,
-    GRADIENT,
-    GAP
+    SOLID       = "solid",
+    GRADIENT    = "gradient",
+    GAP         = "gap"
 };
 
 export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderStyle{

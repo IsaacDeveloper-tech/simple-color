@@ -1,9 +1,7 @@
 import { useContext } from "react";
 import { GeneralContext } from "~/contexts/General";
 import { useDarkMode } from "~/hooks/useDarkMode";
-import { useSetDarkMode } from "~/hooks/useSetDarkMode";
-import { useStyle } from "~/hooks/useStyle";
-import { GeneralContextValue, Status } from "~/types/types";
+import { OnClickDarkMode } from "./navbarFunctions";
 
 export function Navbar(){
 
@@ -11,18 +9,7 @@ export function Navbar(){
     if(!generalContext) return;
 
     const canBeDarkMode = useDarkMode(generalContext.state.colorState.primary);
-
-    const OnClickDarkMode = (generalContext:GeneralContextValue) => {
-        generalContext.setState(
-            state => {
-                const newState:Status = {...state};
-                newState.colorState = useSetDarkMode(generalContext.state.colorState);
-                newState.styleState = useStyle(newState.colorState);
-                return newState;
-            }
-        );
-    };
-
+    
     return (
         <nav className="bg-opacity-0 p-4 fixed top-0 w-full z-10">
             <div className="container mx-auto flex items-center justify-between">
@@ -45,6 +32,5 @@ export function Navbar(){
                 </div>
             </div>
         </nav>
-
     );
 }
