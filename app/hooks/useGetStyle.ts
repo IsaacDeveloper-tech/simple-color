@@ -1,5 +1,6 @@
 import { Colors } from "../types/types";
 
+// Custom hooks
 export function useGetStyle(colors:Colors): void{
     const style = `
     :root {

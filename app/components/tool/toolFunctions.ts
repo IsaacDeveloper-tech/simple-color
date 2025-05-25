@@ -21,8 +21,7 @@ export let chooseColor: (
 // Function Declarations
 putColor = (event, colorRef) =>
 {
-    if(!colorRef.current)
-        return;
+    if(!colorRef.current) return;
 
     colorRef.current.value = event.target.value;
 }
@@ -40,21 +39,7 @@ copyStyle = (colors) =>
 
 putStyle = (event, generalContext) =>
 {
-    const typeStyle : string = event.target.value;
-    let styleSelected : Style;
-
-    switch(typeStyle)
-    {
-        case "gap":
-            styleSelected = Style.GAP;
-            break;
-        case "solid":
-            styleSelected = Style.SOLID;
-            break;
-        case "gradient":
-            styleSelected = Style.GRADIENT;
-            break;
-    }
+    const styleSelected : Style = event.target.value as Style;
 
     generalContext.setState(
         state => {
@@ -69,32 +54,12 @@ chooseColor = (generalContext, colorRef, styleRef) =>
 {
     const color : HTMLInputElement | null = colorRef.current;
 
-    if(!color)
-        return;
+    if(!color) return;
+    if(!isValidInput(color.value)) return;
+    if(!generalContext) return;
+    if(!styleRef.current) return;
 
-    if(!isValidInput(color.value))
-        return;
-
-    if(!generalContext)
-        return;
-
-    if(!styleRef.current)
-        return;
-
-    let styleSelected : Style;
-
-    switch(styleRef.current.value)
-    {
-        case "gap":
-            styleSelected = Style.GAP;
-            break;
-        case "solid":
-            styleSelected = Style.SOLID;
-            break;
-        case "gradient":
-            styleSelected = Style.GRADIENT;
-            break;
-    }
+    const styleSelected : Style = styleRef.current.value as Style;
 
     generalContext.setState(
         state => {

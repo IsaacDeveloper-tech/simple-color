@@ -6,6 +6,7 @@ import {
     chooseColor,
     copyStyle 
 } from "./toolFunctions";
+import { Style } from "~/hooks/useStyle";
 
 // Component
 export function Header(){
@@ -65,9 +66,9 @@ export function Header(){
                     onChange={(e) => putStyle(e, generalContext)}
                     ref={styleRef}
                 >
-                    <option value="gradient">Gradient</option>
-                    <option value="gap">Gap</option>
-                    <option value="solid">Solid</option>
+                    <option value={Style.GRADIENT}>Gradient</option>
+                    <option value={Style.GAP}>Gap</option>
+                    <option value={Style.SOLID}>Solid</option>
                 </select>
             </div>
 

@@ -6,7 +6,38 @@ type ColorHSL = {
     l : number  // Lightness
 };
 
-function hexTohsl(colorHex:string):ColorHSL{
+// Function definitions
+let hexTohsl: (colorHex:string) => ColorHSL;
+let hslTohex: (colorHsl:ColorHSL) => string;
+let getSecondaryColor: (color:ColorHSL) => ColorHSL;
+let getTertiaryColor: (color:ColorHSL) => ColorHSL;
+export let getBestTextColor: (hexColor:string) => string;
+
+// Custom Hooks
+export function useColors(selectedColor:string): Colors{
+    const colorHsl : ColorHSL = hexTohsl(selectedColor);
+    const secondaryColor : string = hslTohex(getSecondaryColor(colorHsl));
+    const tertiaryColor : string = hslTohex(getTertiaryColor(colorHsl));
+
+    const colors:Colors = {
+        primary:selectedColor,
+        secondary:secondaryColor,
+        tertiary:tertiaryColor,
+
+        primaryText: getBestTextColor(selectedColor),
+        secondaryText: getBestTextColor(secondaryColor),
+        tertiaryText: getBestTextColor(tertiaryColor),
+
+        background: "#f2f2f2",
+        text: "#16161d"
+    }
+
+    return colors;
+}
+
+// Function declarations
+hexTohsl = (colorHex) => 
+{
     colorHex = colorHex.replace('#', '');
     if (colorHex.length === 3) {
         colorHex = colorHex.split('').map(c => c + c).join('');
@@ -38,7 +69,8 @@ function hexTohsl(colorHex:string):ColorHSL{
     return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
 }
 
-function hslTohex(colorHsl:ColorHSL):string{
+hslTohex = (colorHsl) =>
+{
     colorHsl.s /= 100;
     colorHsl.l /= 100;
 
@@ -52,7 +84,7 @@ function hslTohex(colorHsl:ColorHSL):string{
     return `#${f(0)}${f(8)}${f(4)}`;
 }
 
-function getSecondaryColor(color:ColorHSL):ColorHSL{
+getSecondaryColor = (color) => {
     const secondaryColor:ColorHSL = {
         h: (color.h + 10) % 360,
         s: Math.max(0, color.s - 10),
@@ -61,7 +93,7 @@ function getSecondaryColor(color:ColorHSL):ColorHSL{
     return secondaryColor;
 }
 
-function getTertiaryColor(color:ColorHSL):ColorHSL{
+getTertiaryColor = (color) => {
     const secondaryColor:ColorHSL = {
         h: (color.h + 150) % 360,
         s: color.s,
@@ -70,7 +102,7 @@ function getTertiaryColor(color:ColorHSL):ColorHSL{
     return secondaryColor;
 }
 
-export function getBestTextColor(hexColor:string):string {
+getBestTextColor = (hexColor) => {
     hexColor = hexColor.replace('#', '');
     if (hexColor.length === 3) {
         hexColor = hexColor.split('').map(c => c + c).join('');
@@ -83,25 +115,4 @@ export function getBestTextColor(hexColor:string):string {
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
 
     return luminance > 128 ? '#000000' : '#ffffff';
-}
-
-export function useColors(selectedColor:string): Colors{
-    const colorHsl : ColorHSL = hexTohsl(selectedColor);
-    const secondaryColor : string = hslTohex(getSecondaryColor(colorHsl));
-    const tertiaryColor : string = hslTohex(getTertiaryColor(colorHsl));
-
-    const colors:Colors = {
-        primary:selectedColor,
-        secondary:secondaryColor,
-        tertiary:tertiaryColor,
-
-        primaryText: getBestTextColor(selectedColor),
-        secondaryText: getBestTextColor(secondaryColor),
-        tertiaryText: getBestTextColor(tertiaryColor),
-
-        background: "#f2f2f2",
-        text: "#16161d"
-    }
-
-    return colors;
 }

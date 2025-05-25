@@ -1,27 +1,10 @@
 import { Colors } from "../types/types";
 import { getBestTextColor } from "./useColors";
 
-// Function to darken a hex color
-function darkenColor(hexColor: string, factor: number): string{
-    // Remove the "#" if it exists
-    hexColor = hexColor.replace("#", "");
+// Function definitions
+let darkenColor: (hexColor: string, factor: number) => string;
 
-    // Parse the hex color into RGB components
-    const r = parseInt(hexColor.substring(0, 2), 16);
-    const g = parseInt(hexColor.substring(2, 4), 16);
-    const b = parseInt(hexColor.substring(4, 6), 16);
-
-    // Darken each component
-    const darken = (c: number) => Math.max(0, Math.floor(c * (1 - factor)));
-
-    const dr = darken(r);
-    const dg = darken(g);
-    const db = darken(b);
-
-    // Convert back to hex
-    return `#${dr.toString(16).padStart(2, '0')}${dg.toString(16).padStart(2, '0')}${db.toString(16).padStart(2, '0')}`;
-};
-
+// Custom hooks
 export function useSetDarkMode(colors : Colors) : Colors{
     const darkModeFactor = 0.7; // Adjust this factor to control the darkness
 
@@ -33,8 +16,6 @@ export function useSetDarkMode(colors : Colors) : Colors{
 
     const tertiary = colors.primary; 
     const tertiaryText = getBestTextColor(tertiary);
-
-
 
     const darkModeColors: Colors = {
       primary: primary,
@@ -48,4 +29,25 @@ export function useSetDarkMode(colors : Colors) : Colors{
     };
 
     return darkModeColors;
+};
+
+// Function declarations
+darkenColor = (hexColor, factor) => {
+  // Remove the "#" if it exists
+  hexColor = hexColor.replace("#", "");
+
+  // Parse the hex color into RGB components
+  const r = parseInt(hexColor.substring(0, 2), 16);
+  const g = parseInt(hexColor.substring(2, 4), 16);
+  const b = parseInt(hexColor.substring(4, 6), 16);
+
+  // Darken each component
+  const darken = (c: number) => Math.max(0, Math.floor(c * (1 - factor)));
+
+  const dr = darken(r);
+  const dg = darken(g);
+  const db = darken(b);
+
+  // Convert back to hex
+  return `#${dr.toString(16).padStart(2, '0')}${dg.toString(16).padStart(2, '0')}${db.toString(16).padStart(2, '0')}`;
 };

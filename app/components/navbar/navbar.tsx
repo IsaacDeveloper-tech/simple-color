@@ -9,7 +9,6 @@ export function Navbar(){
     if(!generalContext) return;
 
     const canBeDarkMode = useDarkMode(generalContext.state.colorState.primary);
-
     
     return (
         <nav className="bg-opacity-0 p-4 fixed top-0 w-full z-10">
@@ -33,6 +32,5 @@ export function Navbar(){
                 </div>
             </div>
         </nav>
-
     );
 }
