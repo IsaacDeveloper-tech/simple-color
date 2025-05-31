@@ -34,7 +34,10 @@ isValidInput = (input) =>
 
 copyStyle = (colors) =>
 {
-    useGetStyle(colors);
+    const style = useGetStyle(colors);
+    
+    navigator.clipboard.writeText(style)
+    .catch(e => console.log(e))
 } 
 
 putStyle = (event, generalContext) =>

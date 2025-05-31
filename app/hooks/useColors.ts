@@ -7,11 +7,11 @@ type ColorHSL = {
 };
 
 // Function definitions
-let hexTohsl: (colorHex:string) => ColorHSL;
-let hslTohex: (colorHsl:ColorHSL) => string;
-let getSecondaryColor: (color:ColorHSL) => ColorHSL;
-let getTertiaryColor: (color:ColorHSL) => ColorHSL;
-export let getBestTextColor: (hexColor:string) => string;
+export let hexTohsl:            (colorHex:string)   => ColorHSL;
+export let hslTohex:            (colorHsl:ColorHSL) => string;
+export let getSecondaryColor:   (color:ColorHSL)    => ColorHSL;
+export let getTertiaryColor:    (color:ColorHSL)    => ColorHSL;
+export let getBestTextColor:    (hexColor:string)   => string;
 
 // Custom Hooks
 export function useColors(selectedColor:string): Colors{

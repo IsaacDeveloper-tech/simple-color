@@ -1,7 +1,7 @@
 import { Colors } from "../types/types";
 
 // Custom hooks
-export function useGetStyle(colors:Colors): void{
+export function useGetStyle(colors:Colors): string{
     const style = `
     :root {
         --primary: ${colors.primary};
@@ -15,6 +15,5 @@ export function useGetStyle(colors:Colors): void{
     }
     `;
 
-    navigator.clipboard.writeText(style)
-    .catch(e => console.log(e));
+    return style;
 }
