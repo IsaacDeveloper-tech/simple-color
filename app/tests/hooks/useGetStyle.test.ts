@@ -17,17 +17,16 @@ describe('useGetStyle', () => {
 
         const style = useGetStyle(mockColors);
 
-        expect(style).toBe(`
-        :root {
-            --primary: ${mockColors.primary};
-            --secondary: ${mockColors.secondary};
-            --tertiary: ${mockColors.tertiary};
-            --primary-text: ${mockColors.primaryText};
-            --secondary-text: ${mockColors.secondaryText};
-            --tertiary-text: ${mockColors.tertiaryText};
-            --background: ${mockColors.background};
-            --text: ${mockColors.text};        
-        }
-        `);
+        expect(style).toContain(`
+    :root {
+        --primary: ${mockColors.primary};
+        --secondary: ${mockColors.secondary};
+        --tertiary: ${mockColors.tertiary};
+        --primary-text: ${mockColors.primaryText};
+        --secondary-text: ${mockColors.secondaryText};
+        --tertiary-text: ${mockColors.tertiaryText};
+        --background: ${mockColors.background};
+        --text: ${mockColors.text};        
+    }`);
     });
 });

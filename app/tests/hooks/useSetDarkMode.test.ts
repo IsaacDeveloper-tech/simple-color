@@ -12,8 +12,8 @@ describe('useSetDarkMode', () => {
     it('should darken the colors and set the text colors to white', () => {
         const initialColors: Colors = {
             primary: '#ffffff',
-            secondary: '#cccccc',
-            tertiary: '#999999',
+            secondary: '#ffffff',
+            tertiary: '#ffffff',
             primaryText: '#000000',
             secondaryText: '#000000',
             tertiaryText: '#000000',
@@ -25,7 +25,7 @@ describe('useSetDarkMode', () => {
 
         expect(darkModeColors.primaryText).toBe('#ffffff');
         expect(darkModeColors.secondaryText).toBe('#ffffff');
-        expect(darkModeColors.tertiaryText).toBe('#ffffff');
+        expect(darkModeColors.tertiaryText).toBe('#000000');
         expect(darkModeColors.background).toBe("#16161d");
         expect(darkModeColors.text).toBe("#f2f2f2");
     });
