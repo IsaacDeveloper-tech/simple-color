@@ -12,6 +12,7 @@ declare module "@remix-run/node" {
 
 export default defineConfig({
   plugins: [
+    !process.env.VITEST &&
     remix({
       future: {
         v3_fetcherPersist: true,
