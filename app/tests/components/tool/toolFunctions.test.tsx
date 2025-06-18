@@ -1,6 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, fireEvent, renderHook, act } from "@testing-library/react";
-import userEvent from '@testing-library/user-event';
+import { render, screen, fireEvent, renderHook } from "@testing-library/react";
 
 import { GeneralContextProvider, GeneralContext } from "~/contexts/General";
 import { useRef, useContext } from "react";
