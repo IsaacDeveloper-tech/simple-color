@@ -2,7 +2,7 @@ import { Colors } from "../types/types";
 import { getBestTextColor } from "./useColors";
 
 // Function definitions
-let darkenColor: (hexColor: string, factor: number) => string;
+export let darkenColor: (hexColor: string, factor: number) => string;
 
 // Custom hooks
 export function useSetDarkMode(colors : Colors) : Colors{

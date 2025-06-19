@@ -7,16 +7,23 @@ import { useColors } from "~/hooks/useColors";
 // Functions defines
 export let putColor: (
     event:ChangeEvent<HTMLInputElement>, 
-    colorRef: React.RefObject<HTMLInputElement>) => void;
+    colorRef: React.RefObject<HTMLInputElement>
+) => void;
+
 export let isValidInput: (input:string) => boolean;
+
 export let copyStyle: (colors:Colors) => void;
+
 export let putStyle: (
     event:ChangeEvent<HTMLSelectElement>, 
-    generalContext: GeneralContextValue) => void;
+    generalContext: GeneralContextValue | null
+) => void;
+
 export let chooseColor: (
-    generalContext: GeneralContextValue, 
+    generalContext: GeneralContextValue | null, 
     colorRef: React.RefObject<HTMLInputElement>, 
-    styleRef: React.RefObject<HTMLSelectElement>) => void;
+    styleRef: React.RefObject<HTMLSelectElement>
+) => void;
 
 // Function Declarations
 putColor = (event, colorRef) =>
@@ -34,12 +41,18 @@ isValidInput = (input) =>
 
 copyStyle = (colors) =>
 {
-    useGetStyle(colors);
+    const style = useGetStyle(colors);
+    
+    navigator.clipboard.writeText(style)
+    .catch(e => console.log(e))
 } 
 
 putStyle = (event, generalContext) =>
 {
     const styleSelected : Style = event.target.value as Style;
+
+    if(!generalContext)
+        return;
 
     generalContext.setState(
         state => {

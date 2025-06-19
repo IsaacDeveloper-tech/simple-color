@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { vitePlugin as remix } from "@remix-run/dev";
 import { defineConfig } from "vite";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -10,6 +12,7 @@ declare module "@remix-run/node" {
 
 export default defineConfig({
   plugins: [
+    !process.env.VITEST &&
     remix({
       future: {
         v3_fetcherPersist: true,
@@ -22,4 +25,9 @@ export default defineConfig({
     }),
     tsconfigPaths(),
   ],
+  test:{
+    globals: true,
+    environment: "jsdom",
+    setupFiles: "./app/tests/setupTest.ts"
+  }
 });

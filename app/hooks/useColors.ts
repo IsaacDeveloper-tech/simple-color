@@ -1,17 +1,18 @@
 import { Colors } from "../types/types";
 
-type ColorHSL = {
+export type ColorHSL = {
     h : number, // Hue
     s : number, // Saturation
     l : number  // Lightness
 };
 
 // Function definitions
-let hexTohsl: (colorHex:string) => ColorHSL;
-let hslTohex: (colorHsl:ColorHSL) => string;
-let getSecondaryColor: (color:ColorHSL) => ColorHSL;
-let getTertiaryColor: (color:ColorHSL) => ColorHSL;
-export let getBestTextColor: (hexColor:string) => string;
+export let hexTohsl:            (colorHex:string)   => ColorHSL;
+export let hslTohex:            (colorHsl:ColorHSL) => string;
+export let getSecondaryColor:   (color:ColorHSL)    => ColorHSL;
+export let getTertiaryColor:    (color:ColorHSL)    => ColorHSL;
+export let getBestTextColor:    (hexColor:string)   => string;
+export let isValidHexColor:     (color:string) => boolean;
 
 // Custom Hooks
 export function useColors(selectedColor:string): Colors{
@@ -38,10 +39,14 @@ export function useColors(selectedColor:string): Colors{
 // Function declarations
 hexTohsl = (colorHex) => 
 {
+    if(!isValidHexColor(colorHex))
+        return {h:0, s:0, l:0};
+
     colorHex = colorHex.replace('#', '');
-    if (colorHex.length === 3) {
+
+    if (colorHex.length === 3) 
         colorHex = colorHex.split('').map(c => c + c).join('');
-    }
+    
     const r:number = parseInt(colorHex.substring(0, 2), 16) / 255;
     const g:number = parseInt(colorHex.substring(2, 4), 16) / 255;
     const b:number = parseInt(colorHex.substring(4, 6), 16) / 255;
@@ -104,9 +109,9 @@ getTertiaryColor = (color) => {
 
 getBestTextColor = (hexColor) => {
     hexColor = hexColor.replace('#', '');
-    if (hexColor.length === 3) {
+    
+    if (hexColor.length === 3)
         hexColor = hexColor.split('').map(c => c + c).join('');
-    }
 
     const r = parseInt(hexColor.substring(0, 2), 16);
     const g = parseInt(hexColor.substring(2, 4), 16);
@@ -115,4 +120,8 @@ getBestTextColor = (hexColor) => {
     const luminance = 0.299 * r + 0.587 * g + 0.114 * b;
 
     return luminance > 128 ? '#000000' : '#ffffff';
+}
+
+isValidHexColor = (color) => {
+    return (/^#([0-9a-fA-F]{6})$/.test(color));
 }
