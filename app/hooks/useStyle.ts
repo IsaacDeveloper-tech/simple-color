@@ -3,6 +3,8 @@ import { Colors } from "../types/types";
 
 export type HeaderStyle = {
     header              : CSSProperties,
+    headerTitle         : CSSProperties,
+    headerSubtitle      : CSSProperties,
     headerInput         : CSSProperties,
     headerButton        : CSSProperties
 };
@@ -20,6 +22,15 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
         header: {
             backgroundColor: colors.primary,
             color: colors.primaryText
+        },
+
+        headerTitle: {
+            //fontWeight: "lighter",
+            fontSize: "8vw"
+        },
+        headerSubtitle: {
+            //fontWeight: "lighter",
+            fontSize: "2vw"
         },
 
         headerInput: {
@@ -42,6 +53,15 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
             color: colors.primaryText
         },
 
+        headerTitle: {
+            fontWeight: "lighter",
+            fontSize: "8vw"
+        },
+        headerSubtitle: {
+            fontWeight: "lighter",
+            fontSize: "2vw"
+        },
+
         headerInput: {
             backgroundColor: colors.background,
             color: colors.text,
@@ -49,8 +69,8 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
         },
 
         headerButton: {
-            background: `linear-gradient(200deg, ${colors.primary} 0%, ${colors.tertiary} 50%, ${colors.secondary} 100%)`,
-            color: colors.tertiaryText,
+            background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
+            color: colors.secondaryText,
             boxShadow: `0 3px 8px -1px ${colors.tertiary}`
         }
     };
@@ -58,15 +78,26 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
     const gapStyle : HeaderStyle = {
         
         header: {
-            backgroundColor: colors.primary,
-            color: colors.primaryText
+            backgroundColor: colors.background,
+            color: colors.text
+        },
+
+        headerTitle: {
+            color: "transparent",
+            backgroundClip: "text",
+            backgroundImage: `linear-gradient(200deg, ${colors.primary} 0%, ${colors.secondary} 50%, ${colors.tertiary} 100%)`,
+            fontSize: "5vw",
+            fontWeight: "bolder"
+        },
+        headerSubtitle: {
+            color: colors.text
         },
 
         headerInput: {
-            backgroundColor: colors.secondary,
-            color: colors.secondaryText,
+            backgroundColor: colors.background,
+            color: colors.text,
             borderStyle: "solid",
-            borderWidth: "7px",
+            borderWidth: "5px",
             borderColor: colors.tertiary,
             borderRadius: 0,
             boxShadow: `0 3px 8px -1px ${colors.secondary}`
@@ -76,10 +107,11 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
             backgroundColor: "transparent",
             color: colors.tertiary,
             borderStyle: "solid",
-            borderWidth: "7px",
+            borderWidth: "5px",
             borderColor: colors.tertiary,
             borderRadius: 0,
-            boxShadow: `0 3px 8px -1px ${colors.secondary}`
+            boxShadow: `0 3px 8px -1px ${colors.secondary}`,
+            fontWeight: "bolder"
         }
     };
 

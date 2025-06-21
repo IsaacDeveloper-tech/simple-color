@@ -39,7 +39,7 @@ function Color(data:ColorProps){
     return(
         <div className="w-[25vw] text-center">
             <div 
-                className="h-[50vh]" 
+                className="h-[25vh]" 
                 style={{
                     backgroundColor:data.colorBackground,
                     color:data.colorText

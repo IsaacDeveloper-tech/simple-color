@@ -23,8 +23,8 @@ export function Header(){
             className="flex flex-col items-center justify-center w-full h-[75vh]"
             style={generalContext.state.styleState.header}
         >
-            <h1 className="text-[4vw] font-thin">Simple Color</h1>
-            <p className="text-[1.5vw] font-thin">A tool for lazy developers</p>
+            <h1 className="text-[4vw]" style={generalContext.state.styleState.headerTitle}>Simple Color</h1>
+            <p className="text-[1.5vw]" style={generalContext.state.styleState.headerSubtitle}>A tool for lazy developers</p>
 
             <div 
                 className="flex items-center justify-center w-full h-[3em] gap-[5px]"
