@@ -25,11 +25,9 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
         },
 
         headerTitle: {
-            //fontWeight: "lighter",
             fontSize: "8vw"
         },
         headerSubtitle: {
-            //fontWeight: "lighter",
             fontSize: "2vw"
         },
 

@@ -1,3 +1,4 @@
+import { NotificationSystem } from "~/classes/NotificationSystem";
 import { HeaderStyle } from "~/hooks/useStyle";
 
 export type Colors = {
@@ -15,7 +16,8 @@ export type Colors = {
 
 export type Status = {
     colorState:Colors,
-    styleState:HeaderStyle
+    styleState:HeaderStyle,
+    notificationSystem:NotificationSystem
 };
 
 export type GeneralContextValue = {

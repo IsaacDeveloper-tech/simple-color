@@ -2,6 +2,7 @@ import { createContext, useState } from "react";
 import { Colors } from "../types/types";
 import { GeneralContextValue, Status } from "../types/types";
 import { Style, useStyle } from "~/hooks/useStyle";
+import { NotificationSystem } from "~/classes/NotificationSystem";
 
 export const GeneralContext = createContext<GeneralContextValue | null>(null);
 
@@ -22,7 +23,8 @@ export function GeneralContextProvider({children}: React.PropsWithChildren){
 
     const [state, setState] = useState<Status>({
         colorState: initialColorState,
-        styleState: useStyle(initialColorState, Style.GRADIENT)
+        styleState: useStyle(initialColorState, Style.GRADIENT),
+        notificationSystem: new NotificationSystem()
     });
 
     return(
