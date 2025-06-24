@@ -15,4 +15,11 @@ export class NotificationSystem{
 
         this.notifications.push(text);
     }
+
+    public deleteNotification(): void {
+        if(this.notifications.length === 0)
+            return;
+
+        this.notifications.slice(1);
+    }
 }

@@ -9,8 +9,30 @@ export function NotificationList(){
         return;
 
     const notificationSystem = generalContext.state.notificationSystem;
-
     const notifications = notificationSystem.getNotifications();
+
+    useEffect(() => {
+        const numOfNotifications: number = notifications.length;
+        
+        if(numOfNotifications === 0)
+            return;
+        
+        const timer = setTimeout(() => {
+            generalContext.setState(state => {
+                const newState = {...state};
+
+                newState.notificationSystem.deleteNotification();
+
+                return newState;
+            });
+        }, 5000);
+
+        return () => clearTimeout(timer);
+
+    }, [
+        generalContext.state, 
+        generalContext.setState
+    ]);
 
     return (
         <div>
