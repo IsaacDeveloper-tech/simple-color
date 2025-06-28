@@ -20,6 +20,6 @@ export class NotificationSystem{
         if(this.notifications.length === 0)
             return;
 
-        this.notifications.slice(1);
+        this.notifications.shift();
     }
 }

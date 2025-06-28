@@ -1,5 +1,5 @@
 import { GeneralContext } from "~/contexts/General";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 export function NotificationList(){
 
@@ -35,15 +35,26 @@ export function NotificationList(){
     ]);
 
     return (
-        <div>
+        <div className="fixed pt-2 top-0 w-[100vw] h-auto flex items-center justify-center gap-2 flex-col">
             { notifications.map((notification, index) => <Notification key={index}  text={ notification } />) }
         </div>
     );
 }
 
 function Notification({ text }:{ text:string }){
+
+    let [animation, setAnimation] = useState<string>("notification-appears");
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            setAnimation(() => "notification-disappears");
+        }, 4500);
+
+        return () => clearTimeout(timeout);
+    }, []);
+
     return (
-        <div className="notification">
+        <div className={`${animation} relative w-[50vw] flex items-center justify-center h-10 bg-green-200 text-white z-50 rounded-md shadow-md`}>
             <span>{ text }</span>
         </div>
     );

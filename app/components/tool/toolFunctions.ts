@@ -3,7 +3,6 @@ import { Colors, Status, GeneralContextValue } from "~/types/types";
 import { useGetStyle } from "~/hooks/useGetStyle";
 import { Style, useStyle } from "~/hooks/useStyle";
 import { useColors } from "~/hooks/useColors";
-import { NotificationSystem } from "~/classes/NotificationSystem";
 
 // Functions defines
 export let putColor: (
@@ -58,6 +57,8 @@ putStyle = (event, generalContext) =>
     generalContext.setState(
         state => {
             const newState:Status = {...state};
+
+            newState.notificationSystem.setNotification("New style setted");
             newState.styleState = useStyle(state.colorState, styleSelected);
             return newState;
         }
@@ -75,13 +76,11 @@ chooseColor = (generalContext, colorRef, styleRef) =>
 
     const styleSelected : Style = styleRef.current.value as Style;
 
-    const notificationSystem = generalContext.state.notificationSystem;
-
     generalContext.setState(
         state => {
             const newState:Status = {...state};
 
-            newState.notificationSystem.setNotification("Style copied in clipboard");
+            newState.notificationSystem.setNotification("New color setted");
             newState.colorState = useColors(color.value);
             newState.styleState = useStyle(newState.colorState, styleSelected);
             return newState;
