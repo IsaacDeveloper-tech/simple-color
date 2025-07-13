@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white dark:bg-gray-950;
+
+  @media (prefers-color-scheme: dark) {
+    color-scheme: dark;
+  }
+}
+
+.notification-appears{
+  animation: appear 1s forwards ease;
+}
+
+.notification-disappears{
+  animation: disappear 1s forwards ease;
+}
+
+@keyframes appear {
+  0%{
+    opacity: 0;
+    transform: translateY(-1em);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes disappear {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}

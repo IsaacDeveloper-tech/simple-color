@@ -1,3 +1,10 @@
+node_modules
+
+/.cache
+/build
+/coverage
+.env
+
 # Logs
 logs
 *.log
