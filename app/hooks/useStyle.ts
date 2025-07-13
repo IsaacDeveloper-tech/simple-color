@@ -6,7 +6,9 @@ export type HeaderStyle = {
     headerTitle         : CSSProperties,
     headerSubtitle      : CSSProperties,
     headerInput         : CSSProperties,
-    headerButton        : CSSProperties
+    headerButton        : CSSProperties,
+    headerButtonHover   : CSSProperties,
+    headerButtonActive  : CSSProperties,
 };
 
 export enum Style{
@@ -41,7 +43,9 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
             backgroundColor: colors.secondary,
             color: colors.secondaryText,
             boxShadow: `0 3px 8px -1px ${colors.tertiary}`
-        }
+        },
+        headerButtonHover: {},
+        headerButtonActive: {}
     };
 
     const gradientStyle : HeaderStyle = {
@@ -70,6 +74,18 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
             background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
             color: colors.secondaryText,
             boxShadow: `0 3px 8px -1px ${colors.tertiary}`
+        },
+
+        headerButtonHover: {
+            background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
+            color: colors.secondaryText,
+            boxShadow: `0 3px 4px -1px ${colors.tertiary}`
+        },
+
+        headerButtonActive: {
+            background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.secondary} 100%)`,
+            color: colors.secondaryText,
+            boxShadow: `0 3px 4px -1px ${colors.tertiary}`
         }
     };
 
@@ -110,7 +126,10 @@ export function useStyle(colors:Colors, style:Style = Style.GRADIENT) : HeaderSt
             borderRadius: 0,
             boxShadow: `0 3px 8px -1px ${colors.secondary}`,
             fontWeight: "bolder"
-        }
+        },
+
+        headerButtonHover: {},
+        headerButtonActive: {}
     };
 
     switch(style)
