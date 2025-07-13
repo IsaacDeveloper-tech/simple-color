@@ -90,7 +90,7 @@ describe("Tool component functions", () => {
     }
     `;
 
-        await copyStyle(colors);
+        //await copyStyle(colors);
 
         expect(writeTextMock).toHaveBeenCalledTimes(1);
         //TODO

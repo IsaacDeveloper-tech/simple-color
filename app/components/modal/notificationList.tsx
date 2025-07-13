@@ -25,7 +25,7 @@ export function NotificationList(){
 
                 return newState;
             });
-        }, 5000);
+        }, 4500);
 
         return () => clearTimeout(timer);
 
@@ -35,7 +35,7 @@ export function NotificationList(){
     ]);
 
     return (
-        <div className="fixed pt-2 top-0 w-[100vw] h-auto flex items-center justify-center gap-2 flex-col">
+        <div className="fixed pt-2 top-0 w-[100vw] h-auto flex items-center justify-center gap-2 flex-col-reverse">
             { notifications.map((notification, index) => <Notification key={index}  text={ notification } />) }
         </div>
     );

@@ -54,7 +54,7 @@ export function Header(){
 
                 <button 
                     className="w-[10em] h-[4em] mt-[2em] border-none rounded-[5px]" 
-                    onClick={() => copyStyle(generalContext.state.colorState)}
+                    onClick={() => copyStyle(generalContext)}
                     style={generalContext.state.styleState.headerButton}
                 >Copy Colors</button>
 
