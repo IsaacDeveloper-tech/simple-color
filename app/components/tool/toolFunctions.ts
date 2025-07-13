@@ -12,7 +12,7 @@ export let putColor: (
 
 export let isValidInput: (input:string) => boolean;
 
-export let copyStyle: (colors:Colors) => void;
+export let copyStyle: (generalContext:GeneralContextValue) => void;
 
 export let putStyle: (
     event:ChangeEvent<HTMLSelectElement>, 
@@ -39,9 +39,15 @@ isValidInput = (input) =>
     return regex.test(input);
 }
 
-copyStyle = (colors) =>
+copyStyle = (generalContext) =>
 {
-    const style = useGetStyle(colors);
+    const style = useGetStyle(generalContext.state.colorState);
+
+    generalContext.setState(state => {
+        const newState = {...state};
+        newState.notificationSystem.setNotification("Colors copied in clipboard");
+        return newState;
+    });
     
     navigator.clipboard.writeText(style)
     .catch(e => console.log(e))
@@ -57,6 +63,8 @@ putStyle = (event, generalContext) =>
     generalContext.setState(
         state => {
             const newState:Status = {...state};
+
+            newState.notificationSystem.setNotification("New style setted");
             newState.styleState = useStyle(state.colorState, styleSelected);
             return newState;
         }
@@ -78,6 +86,7 @@ chooseColor = (generalContext, colorRef, styleRef) =>
         state => {
             const newState:Status = {...state};
 
+            newState.notificationSystem.setNotification("New color setted");
             newState.colorState = useColors(color.value);
             newState.styleState = useStyle(newState.colorState, styleSelected);
             return newState;
