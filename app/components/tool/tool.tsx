@@ -30,6 +30,7 @@ export function Header(){
                 className="flex items-center justify-center w-full h-[3em] gap-[5px]"
             >
                 <input 
+                    aria-label="Color in Hexadecimal"
                     className="h-[3em] w-[50%] rounded-[5px] border-none pl-[10px]" 
                     style={generalContext.state.styleState.headerInput}
                     ref={colorRef} 
@@ -38,6 +39,7 @@ export function Header(){
                 />
                 
                 <input 
+                    aria-label="Palette of colors"
                     className="h-[3em] border-none bg-transparent" 
                     onChange={(e) => putColor(e, colorRef)} 
                     type="color" 
@@ -59,6 +61,7 @@ export function Header(){
                 >Copy Colors</button>
 
                 <select 
+                    aria-label="Styles of webpage"
                     name="cars" 
                     id="cars" 
                     className="w-[5em] h-[4em] mt-[2em] border-none rounded-[5px] text-center"
