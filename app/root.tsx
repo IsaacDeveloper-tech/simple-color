@@ -25,10 +25,14 @@ export const links: LinksFunction = () => [
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="es">
+    <html lang="en">
       <head>
+        <title>Simple Color - A tool for choose colors</title>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta 
+          name="description" 
+          content="Simple Color is a web tool that helps developers with no design background choose beautiful color combinations effortlessly and quickly."/>
         <Meta />
         <Links />
       </head>
